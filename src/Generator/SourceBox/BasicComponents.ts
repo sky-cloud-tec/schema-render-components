@@ -5,7 +5,7 @@
  * @Email: Draco.coder@gmail.com
  * @Github: https://github.com/draco-china
  * @Date: 2020-09-18 11:10:09
- * @LastEditTime: 2020-10-20 15:43:17
+ * @LastEditTime: 2020-10-21 17:18:36
  */
 import { IMarkupSchemaFieldProps } from '@formily/antd';
 
@@ -15,12 +15,6 @@ export const BasicGroup = [
     name: 'String',
     title: '输入框',
     description: '输入框组件',
-  },
-  {
-    type: 'select',
-    name: 'Select',
-    title: '选择框',
-    description: '选择框组件',
   },
   {
     type: 'textarea',
@@ -39,6 +33,12 @@ export const BasicGroup = [
     name: 'Number',
     title: '数字框',
     description: '数字输入框组件',
+  },
+  {
+    type: 'select',
+    name: 'Select',
+    title: '选择框',
+    description: '选择框组件',
   },
   {
     type: 'checkbox',

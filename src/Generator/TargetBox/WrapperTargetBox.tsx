@@ -248,12 +248,17 @@ const WrapperTargetBox: React.FC<WrapperTargetBoxProps> = ({
 
   const handelCopyItem = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
+    const key = `${schema?.type}_${nanoid(6)}`;
+    let newLocationPath = JSON.parse(JSON.stringify(locationPath));
+    let lastPath = newLocationPath[newLocationPath.length - 1];
+    newLocationPath[newLocationPath.length - 1] = lastPath + 1;
     incrementEvent(
       {
         ...schema!,
-        key: `${schema?.type}_${nanoid(6)}`,
+        name: key,
+        key,
       },
-      locationPath!,
+      newLocationPath!,
     );
   };
 

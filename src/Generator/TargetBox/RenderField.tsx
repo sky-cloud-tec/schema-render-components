@@ -16,8 +16,8 @@ export const RenderField: React.FC<ISchema> = ({
   const itemProps: any = {
     name,
     label: title,
-    options: props.enum || [],
-    dataSource: props.enum || [],
+    options: props.enum,
+    dataSource: props.enum,
     descriptions: description,
     component: components[type || 'string'],
     size: 'small',

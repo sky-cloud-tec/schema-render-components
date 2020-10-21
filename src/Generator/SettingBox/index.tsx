@@ -46,51 +46,54 @@ const SettingBox: React.FC<SettingBoxProps> = ({ collapsed }) => {
       collapsed={collapsed ? !selected : true}
       key={selected?.key}
     >
-      {useMemo(
-        () =>
-          selected && (
-            <SchemaForm
-              title="模型设置"
-              style={{
-                padding: 12,
-              }}
-              layout="vertical"
-              size="small"
-              actions={actions}
-              components={components}
-              effects={() => {
-                useCyclicLinkageEffects();
-              }}
-              initialValues={selected}
-              onChange={(values: ISchema) => {
-                actions.validate().then(() => {
-                  setGeneratorState(prev => {
-                    const { schemaData, locationPath } = prev;
-                    if (locationPath) {
-                      const modifySchemaData = updateSchemaData(
-                        schemaData,
-                        locationPath,
-                        (lastPath, temp) => {
-                          temp[lastPath] = {
-                            ...temp[lastPath],
-                            ...JSON.parse(JSON.stringify(values)),
-                          };
-                        },
-                      );
-                      return { ...prev, schemaData: modifySchemaData };
-                    }
-                    return prev;
-                  });
-                });
-              }}
-            >
-              <Field title="字段名称" name="name" type="string" required />
-              <Field title="标题" name="title" type="string" required />
-              <Field title="描述" name="description" type="string" />
+      {selected && (
+        <SchemaForm
+          title="模型设置"
+          style={{
+            padding: 12,
+          }}
+          layout="vertical"
+          size="small"
+          actions={actions}
+          components={components}
+          effects={() => {
+            useCyclicLinkageEffects();
+          }}
+          initialValues={selected}
+          onChange={(values: ISchema) => {
+            actions.validate().then(() => {
+              setGeneratorState(prev => {
+                const { schemaData, locationPath } = prev;
+                if (locationPath) {
+                  const modifySchemaData = updateSchemaData(
+                    schemaData,
+                    locationPath,
+                    (lastPath, temp) => {
+                      temp[lastPath] = {
+                        ...temp[lastPath],
+                        ...JSON.parse(JSON.stringify(values)),
+                      };
+                    },
+                  );
+                  return { ...prev, schemaData: modifySchemaData };
+                }
+                return prev;
+              });
+            });
+          }}
+        >
+          <Field title="字段名称" name="name" type="string" required />
+          <Field title="标题" name="title" type="string" required />
+          <Field title="描述" name="description" type="string" />
+          {!['object', 'array', 'step'].includes(selected.type as string) && (
+            <>
               <Field
                 title="候选值"
                 name="enum"
                 type="array"
+                visible={['select', 'checkbox', 'radio', 'transfer'].includes(
+                  selected.type as string,
+                )}
                 x-component-props={{
                   renderAddition: () => (
                     <Button type="link" size="small">
@@ -115,34 +118,26 @@ const SettingBox: React.FC<SettingBoxProps> = ({ collapsed }) => {
                   <Field title="值" name="value" type="string" required />
                 </Field>
               </Field>
-              <Field title="默认值" name="default" type={selected?.type} />
+              {selected?.type && (
+                <Field title="默认值" name="default" type={selected?.type} />
+              )}
               <FormBlock title="校验" size="small">
                 <FormLayout inline>
                   <Field title="必填" name="required" type="boolean" />
                   <Field title="正则" name="pattern" type="string" />
                 </FormLayout>
               </FormBlock>
-              <FormBlock title="隐藏" size="small">
+              <FormBlock title="表格设置" size="small">
                 <FormLayout inline>
-                  <Field title="搜索" name="hideInSearch" type="boolean" />
-                  <Field title="列表" name="hideInTable" type="boolean" />
-                  <Field title="表单" name="hideInForm" type="boolean" />
-                  <Field
-                    title="详情"
-                    name="hideInDescriptions"
-                    type="boolean"
-                  />
-                </FormLayout>
-              </FormBlock>
-              <FormBlock title="列表功能增强" size="small">
-                <FormLayout inline>
+                  <Field title="隐藏搜索" name="hideInSearch" type="boolean" />
+                  <Field title="隐藏列表" name="hideInTable" type="boolean" />
                   <Field title="缩略" name="ellipsis" type="boolean" />
                   <Field title="复制" name="copyable" type="boolean" />
                 </FormLayout>
               </FormBlock>
-            </SchemaForm>
-          ),
-        [selected?.key],
+            </>
+          )}
+        </SchemaForm>
       )}
     </Layout.Sider>
   );

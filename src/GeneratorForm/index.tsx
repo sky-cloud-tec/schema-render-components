@@ -91,7 +91,13 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
   const isStep = schema.find(field => field.type === 'step');
   const [current, setCurrent] = useState<number>(0);
   return (
-    <Card size="small">
+    <Card
+      style={{
+        height: '100%',
+        overflowY: 'scroll',
+      }}
+      size="small"
+    >
       <SchemaForm
         layout="vertical"
         components={components}
