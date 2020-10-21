@@ -5,7 +5,7 @@ sidemenu: false
 
 ```tsx
 import React from 'react';
-import { Generator } from 'pro-components-schema';
+import { Generator } from 'formily-schema-generator';
 
 export default () => <Generator />;
 ```

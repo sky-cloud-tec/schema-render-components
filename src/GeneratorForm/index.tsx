@@ -69,7 +69,6 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
   resetProps,
   ...props
 }) => {
-  console.log(schema);
   if (!schema) return null;
   return (
     <Card size="small">
