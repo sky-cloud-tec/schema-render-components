@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SchemaForm,
   SchemaMarkupField as Field,
   FormButtonGroup,
   Submit,
   Reset,
+  createFormActions,
 } from '@formily/antd';
 import components from './components';
 import { ISchema } from '@/Generator/interface';
@@ -15,6 +16,7 @@ import {
 } from '@formily/antd-components/esm/types';
 import { Button, Card } from 'antd';
 import { FormOutlined } from '@ant-design/icons';
+import { FormCard, FormStep } from '@formily/antd-components';
 
 interface GeneratorFormProps extends Omit<IAntdSchemaFormProps, 'schema'> {
   schema: ISchema[];
@@ -24,6 +26,8 @@ interface GeneratorFormProps extends Omit<IAntdSchemaFormProps, 'schema'> {
   resetProps?: IResetProps & {
     children: React.ReactNode;
   };
+  stepPrevButton?: React.ReactNode;
+  stepNextButton?: React.ReactNode;
 }
 
 const RenderField = (fields: ISchema[] = []) => {
@@ -59,20 +63,49 @@ const RenderField = (fields: ISchema[] = []) => {
     if (field.type === 'object') {
       return <Field {...field}>{RenderField(field.children)}</Field>;
     }
+    if (field.type === 'step') {
+      return (
+        <FormCard
+          size="small"
+          bordered={false}
+          name={field.name as string}
+          key={field.key}
+        >
+          {RenderField(field.children)}
+        </FormCard>
+      );
+    }
     return <Field {...field} />;
   });
 };
-
+const actions = createFormActions();
 const GeneratorForm: React.FC<GeneratorFormProps> = ({
   schema,
   submitProps,
   resetProps,
+  stepPrevButton,
+  stepNextButton,
   ...props
 }) => {
   if (!schema) return null;
+  const isStep = schema.find(field => field.type === 'step');
+  const [current, setCurrent] = useState<number>(0);
   return (
     <Card size="small">
-      <SchemaForm layout="vertical" components={components} {...props}>
+      <SchemaForm
+        layout="vertical"
+        components={components}
+        actions={actions}
+        {...props}
+      >
+        {!!isStep && (
+          <FormStep
+            dataSource={schema.map(item => ({
+              title: item.title as string,
+              name: item.name as string,
+            }))}
+          />
+        )}
         {RenderField(schema)}
         {props.editable !== false && (
           <FormButtonGroup
@@ -81,8 +114,51 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
             }}
             align="center"
           >
-            <Submit {...submitProps}>{resetProps?.children || 'Submit'}</Submit>
-            <Reset {...resetProps}>{resetProps?.children || 'Reset'}</Reset>
+            {!!isStep ? (
+              <>
+                {current > 0 && (
+                  <span
+                    onClick={() => {
+                      if (actions.dispatch) {
+                        actions.dispatch('onFormStepPrevious', undefined);
+                        setCurrent(current - 1);
+                      }
+                    }}
+                  >
+                    {stepPrevButton || <Button>上一步</Button>}
+                  </span>
+                )}
+                {current < schema.length - 1 ? (
+                  <span
+                    onClick={() => {
+                      if (actions.dispatch) {
+                        actions.dispatch('onFormStepNext', undefined);
+                        setCurrent(current + 1);
+                      }
+                    }}
+                  >
+                    {stepNextButton || <Button type="primary">下一步</Button>}
+                  </span>
+                ) : (
+                  <Submit
+                    onSubmit={values => console.log(values)}
+                    {...submitProps}
+                  >
+                    {resetProps?.children || 'Submit'}
+                  </Submit>
+                )}
+              </>
+            ) : (
+              <>
+                <Submit
+                  onSubmit={values => console.log(values)}
+                  {...submitProps}
+                >
+                  {resetProps?.children || 'Submit'}
+                </Submit>
+                <Reset {...resetProps}>{resetProps?.children || 'Reset'}</Reset>
+              </>
+            )}
           </FormButtonGroup>
         )}
       </SchemaForm>
