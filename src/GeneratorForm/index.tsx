@@ -26,8 +26,8 @@ interface GeneratorFormProps extends Omit<IAntdSchemaFormProps, 'schema'> {
   resetProps?: IResetProps & {
     children: React.ReactNode;
   };
-  stepPrevButton?: React.ReactNode;
-  stepNextButton?: React.ReactNode;
+  stepPrevButton?: React.ReactElement;
+  stepNextButton?: React.ReactElement;
 }
 
 const RenderField = (fields: ISchema[] = []) => {
@@ -116,29 +116,30 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
           >
             {!!isStep ? (
               <>
-                {current > 0 && (
-                  <span
-                    onClick={() => {
-                      if (actions.dispatch) {
-                        actions.dispatch('onFormStepPrevious', undefined);
-                        setCurrent(current - 1);
-                      }
-                    }}
-                  >
-                    {stepPrevButton || <Button>上一步</Button>}
-                  </span>
-                )}
+                {current > 0 &&
+                  React.cloneElement(
+                    stepPrevButton || <Button>上一步</Button>,
+                    {
+                      onClick: () => {
+                        if (actions.dispatch) {
+                          actions.dispatch('onFormStepPrevious', undefined);
+                          setCurrent(current - 1);
+                        }
+                      },
+                    },
+                  )}
                 {current < schema.length - 1 ? (
-                  <span
-                    onClick={() => {
-                      if (actions.dispatch) {
-                        actions.dispatch('onFormStepNext', undefined);
-                        setCurrent(current + 1);
-                      }
-                    }}
-                  >
-                    {stepNextButton || <Button type="primary">下一步</Button>}
-                  </span>
+                  React.cloneElement(
+                    stepNextButton || <Button type="primary">下一步</Button>,
+                    {
+                      onClick: () => {
+                        actions.validate().then(() => {
+                          actions.dispatch!('onFormStepNext', undefined);
+                          setCurrent(current + 1);
+                        });
+                      },
+                    },
+                  )
                 ) : (
                   <Submit
                     onSubmit={values => console.log(values)}
