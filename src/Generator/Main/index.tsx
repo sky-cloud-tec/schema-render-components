@@ -7,7 +7,7 @@ import './global.less';
 import styles from './index.less';
 import { useRecoilValue } from 'recoil';
 import { schemaState, selectedState } from '../Recoil';
-import TableGenerator from '@/Table';
+import GeneratorTable from '@/GeneratorTable';
 import { Form } from '@formily/antd';
 import GeneratorForm from '@/GeneratorForm';
 
@@ -51,7 +51,7 @@ const Main: React.FC<MainProps> = () => {
             </Form>
           </Tabs.TabPane>
           <Tabs.TabPane tab="表格预览" key="table">
-            <TableGenerator schema={schema} />
+            <GeneratorTable schema={schema} />
           </Tabs.TabPane>
           <Tabs.TabPane tab="表单预览" key="form">
             <GeneratorForm schema={schema} />

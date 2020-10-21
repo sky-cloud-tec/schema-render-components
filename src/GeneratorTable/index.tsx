@@ -1,14 +1,14 @@
 import React from 'react';
-import { Schema } from '@/Generator/interface';
+import { ISchema } from '@/Generator/interface';
 import { Empty, Form } from 'antd';
 import { RenderField } from '@/Generator/TargetBox/RenderField';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 
-interface TableGeneratorProps {
-  schema: Schema[];
+interface GeneratorTableProps {
+  schema: ISchema[];
 }
 
-const TableGenerator: React.FC<TableGeneratorProps> = ({ schema }) => {
+const GeneratorTable: React.FC<GeneratorTableProps> = ({ schema }) => {
   if (schema.length > 0) {
     const columns: any = schema.map(filed => {
       return {
@@ -54,4 +54,4 @@ const TableGenerator: React.FC<TableGeneratorProps> = ({ schema }) => {
   return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
 };
 
-export default TableGenerator;
+export default GeneratorTable;
