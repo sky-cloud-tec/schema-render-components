@@ -100,6 +100,7 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
     >
       <SchemaForm
         layout="vertical"
+        size="small"
         components={components}
         actions={actions}
         {...props}
