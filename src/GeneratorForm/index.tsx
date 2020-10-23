@@ -105,7 +105,7 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
         actions={actions}
         {...props}
       >
-        {!!isStep && (
+        {!!isStep && props.editable !== false && (
           <FormStep
             dataSource={schema.map(item => ({
               title: item.title as string,
