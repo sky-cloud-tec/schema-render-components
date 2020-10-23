@@ -1,14 +1,39 @@
 ---
-title: 编辑器
+title: 表格Demo
 ---
 
 ```tsx
 import React from 'react';
-import { Generator } from 'formily-schema-generator';
+import { GeneratorTable } from 'formily-schema-generator';
 
 export default () => (
-  <Generator
-    defaultSchema={[
+  <GeneratorTable
+    request={params =>
+      Promise.resolve({
+        data: [
+          {
+            array: [
+              {
+                string: 'Array.0',
+                time: '12:00:00',
+              },
+              {
+                string: 'Array.1',
+                time: '12:00:00',
+              },
+            ],
+            object: {
+              string: 'Object.string',
+              textarea: 'Object.textarea',
+            },
+            string: 'string',
+            textarea: 'textarea',
+          },
+        ],
+        success: true,
+      })
+    }
+    schema={[
       {
         type: 'step',
         name: 'step-1',

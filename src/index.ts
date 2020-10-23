@@ -5,6 +5,8 @@
  * @Email: Draco.coder@gmail.com
  * @Github: https://github.com/draco-china
  * @Date: 2020-09-18 11:10:09
- * @LastEditTime: 2020-09-18 11:10:09
+ * @LastEditTime: 2020-10-23 14:09:29
  */
 export { default as Generator } from './Generator';
+export { default as GeneratorForm } from './GeneratorForm';
+export { default as GeneratorTable } from './GeneratorTable';

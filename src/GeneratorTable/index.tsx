@@ -56,39 +56,17 @@ const getColumns: (
   });
 };
 
-const GeneratorTable: React.FC<GeneratorTableProps> = ({ schema }) => {
+const GeneratorTable: React.FC<GeneratorTableProps> = ({
+  schema,
+  ...props
+}) => {
   if (schema.length > 0) {
     const columns: any = getColumns(schema).flat(Infinity);
-    console.log(columns);
+
     return (
       <ProTable
         bordered
         size="small"
-        request={params =>
-          Promise.resolve({
-            data: [
-              {
-                array: [
-                  {
-                    string: 'Array.0',
-                    time: '12:00:00',
-                  },
-                  {
-                    string: 'Array.1',
-                    time: '12:00:00',
-                  },
-                ],
-                object: {
-                  string: 'Object.string',
-                  textarea: 'Object.textarea',
-                },
-                string: 'string',
-                textarea: 'textarea',
-              },
-            ],
-            success: true,
-          })
-        }
         tableStyle={{
           whiteSpace: 'nowrap',
         }}
@@ -118,6 +96,7 @@ const GeneratorTable: React.FC<GeneratorTableProps> = ({ schema }) => {
             ];
           },
         }}
+        {...props}
         columns={columns}
       />
     );

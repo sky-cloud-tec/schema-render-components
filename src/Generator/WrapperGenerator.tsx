@@ -1,28 +1,42 @@
-import React, { useMemo, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { Button, Layout, Space, Tabs } from 'antd';
-import SourceBox from '../SourceBox';
-import TargetBox from '../TargetBox';
-import SettingBox from '../SettingBox';
-import './global.less';
-import styles from './index.less';
-import { useRecoilValue } from 'recoil';
-import { schemaState, selectedState } from '../Recoil';
+import SourceBox from './SourceBox';
+import TargetBox from './TargetBox';
+import SettingBox from './SettingBox';
+import {
+  useRecoilCallback,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from 'recoil';
+import { generatorState, schemaState, selectedState } from './Recoil';
 import GeneratorTable from '@/GeneratorTable';
 import { Form } from '@formily/antd';
 import GeneratorForm from '@/GeneratorForm';
+import { GeneratorProps } from '.';
 
-interface MainProps {}
-const Main: React.FC<MainProps> = () => {
+import './global.less';
+import styles from './index.less';
+
+const WrapperGenerator: React.FC<GeneratorProps> = ({ defaultSchema }) => {
+  const setGeneratorState = useSetRecoilState(generatorState);
+  useEffect(() => {
+    if (defaultSchema) {
+      setGeneratorState({ schemaData: defaultSchema });
+    }
+  }, [defaultSchema]);
+
   const schema = useRecoilValue(schemaState);
   const selected = useRecoilValue(selectedState);
   const [activeKey, setActiveKey] = useState('edit');
+
   return (
-    <Layout className={styles.Main} id="generator">
+    <Layout className={styles.WrapperGenerator} id="generator">
       <SourceBox />
       <Layout.Content>
         <Tabs
           size="small"
-          className={styles.MainTabs}
+          className={styles.WrapperGeneratorTabs}
           style={{
             borderRightWidth: activeKey === 'edit' && selected ? 1 : 0,
           }}
@@ -36,7 +50,15 @@ const Main: React.FC<MainProps> = () => {
           tabBarExtraContent={
             <Space>
               <Button size="small">导出</Button>
-              <Button size="small" danger>
+              <Button
+                size="small"
+                onClick={() => {
+                  setGeneratorState({
+                    schemaData: [],
+                  });
+                }}
+                danger
+              >
                 重置
               </Button>
               <Button size="small" type="primary">
@@ -66,4 +88,4 @@ const Main: React.FC<MainProps> = () => {
   );
 };
 
-export default Main;
+export default WrapperGenerator;
