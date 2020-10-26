@@ -21,6 +21,7 @@ export default () => {
       <br />
       <br />
       <GeneratorForm
+        key={`${editable}`}
         editable={editable}
         initialValues={{
           array: [

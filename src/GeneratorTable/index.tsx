@@ -66,7 +66,6 @@ const GeneratorTable: React.FC<GeneratorTableProps> = ({
     return (
       <ProTable
         bordered
-        size="small"
         tableStyle={{
           whiteSpace: 'nowrap',
         }}

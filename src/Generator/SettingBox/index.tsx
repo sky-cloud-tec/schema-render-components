@@ -1,13 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Layout, Button } from 'antd';
+import { Layout, Button, Space } from 'antd';
 import styles from './index.less';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { generatorState, selectedState, updateSchemaData } from '../Recoil';
 import {
   createFormActions,
+  FormButtonGroup,
   FormEffectHooks,
+  Reset,
   SchemaForm,
   SchemaMarkupField as Field,
+  Submit,
 } from '@formily/antd';
 import components from '@/GeneratorForm/components';
 import { FormBlock, FormLayout } from '@formily/antd-components';
@@ -60,8 +63,8 @@ const SettingBox: React.FC<SettingBoxProps> = ({ collapsed }) => {
             useCyclicLinkageEffects();
           }}
           initialValues={selected}
-          onChange={(values: ISchema) => {
-            actions.validate().then(() => {
+          onChange={values => {
+            actions.validate().then(msg => {
               setGeneratorState(prev => {
                 const { schemaData, locationPath } = prev;
                 if (locationPath) {
@@ -82,7 +85,18 @@ const SettingBox: React.FC<SettingBoxProps> = ({ collapsed }) => {
             });
           }}
         >
-          <Field title="字段名称" name="name" type="string" required />
+          <Field
+            title="字段名称"
+            name="name"
+            type="string"
+            required
+            x-rules={[
+              {
+                pattern: /^[A-Za-z0-9_\-]+$/gi,
+                message: '字段名字只能由 大小写字母、数组、下划线 组成！',
+              },
+            ]}
+          />
           <Field title="标题" name="title" type="string" required />
           <Field title="描述" name="description" type="string" />
           {!['object', 'array', 'step'].includes(selected.type as string) && (

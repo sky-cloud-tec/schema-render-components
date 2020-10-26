@@ -16,7 +16,7 @@ import {
 } from '@formily/antd-components/esm/types';
 import { Button, Card } from 'antd';
 import { FormOutlined } from '@ant-design/icons';
-import { FormCard, FormStep } from '@formily/antd-components';
+import { FormCard, FormLayout, FormStep } from '@formily/antd-components';
 
 interface GeneratorFormProps extends Omit<IAntdSchemaFormProps, 'schema'> {
   schema: ISchema[];
@@ -99,8 +99,9 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
       size="small"
     >
       <SchemaForm
-        layout="vertical"
         size="small"
+        labelCol={7}
+        wrapperCol={12}
         components={components}
         actions={actions}
         {...props}
