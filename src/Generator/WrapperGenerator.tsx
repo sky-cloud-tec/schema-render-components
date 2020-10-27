@@ -3,12 +3,7 @@ import { Button, Layout, Space, Tabs } from 'antd';
 import SourceBox from './SourceBox';
 import TargetBox from './TargetBox';
 import SettingBox from './SettingBox';
-import {
-  useRecoilCallback,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { generatorState, schemaState, selectedState } from './Recoil';
 import GeneratorTable from '@/GeneratorTable';
 import { Form } from '@formily/antd';
@@ -18,7 +13,11 @@ import { GeneratorProps } from '.';
 import './global.less';
 import styles from './index.less';
 
-const WrapperGenerator: React.FC<GeneratorProps> = ({ defaultSchema }) => {
+const WrapperGenerator: React.FC<GeneratorProps> = ({
+  defaultSchema,
+  onExport,
+  onSave,
+}) => {
   const setGeneratorState = useSetRecoilState(generatorState);
   useEffect(() => {
     if (defaultSchema) {
@@ -49,7 +48,6 @@ const WrapperGenerator: React.FC<GeneratorProps> = ({ defaultSchema }) => {
           onChange={setActiveKey}
           tabBarExtraContent={
             <Space>
-              <Button size="small">导出</Button>
               <Button
                 size="small"
                 onClick={() => {
@@ -59,9 +57,38 @@ const WrapperGenerator: React.FC<GeneratorProps> = ({ defaultSchema }) => {
                 }}
                 danger
               >
+                清空
+              </Button>
+              <Button
+                size="small"
+                onClick={() => {
+                  setGeneratorState({
+                    schemaData: defaultSchema || [],
+                  });
+                }}
+                danger
+              >
                 重置
               </Button>
-              <Button size="small" type="primary">
+              <Button
+                size="small"
+                onClick={() => {
+                  if (onExport) {
+                    onExport(schema);
+                  }
+                }}
+              >
+                导出
+              </Button>
+              <Button
+                size="small"
+                type="primary"
+                onClick={() => {
+                  if (onSave) {
+                    onSave(schema);
+                  }
+                }}
+              >
                 保存
               </Button>
             </Space>

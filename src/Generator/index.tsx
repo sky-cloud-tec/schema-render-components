@@ -7,6 +7,8 @@ import WrapperGenerator from './WrapperGenerator';
 
 export interface GeneratorProps {
   defaultSchema?: ISchema[];
+  onSave?: (values: ISchema[]) => void;
+  onExport?: (values: ISchema[]) => void;
 }
 
 const Generator: React.FC<GeneratorProps> = props => {
