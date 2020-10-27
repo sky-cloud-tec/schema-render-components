@@ -106,70 +106,68 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
         actions={actions}
         {...props}
       >
-        {!!isStep && props.editable !== false && (
-          <FormStep
-            dataSource={schema.map(item => ({
-              title: item.title as string,
-              name: item.name as string,
-            }))}
-          />
-        )}
-        {RenderField(schema)}
-        {props.editable !== false && (
-          <FormButtonGroup
-            style={{
-              justifyContent: 'center',
-            }}
-            align="center"
-          >
-            {!!isStep ? (
-              <>
-                {current > 0 &&
-                  React.cloneElement(
-                    stepPrevButton || <Button>上一步</Button>,
-                    {
-                      onClick: () => {
-                        if (actions.dispatch) {
-                          actions.dispatch('onFormStepPrevious', undefined);
-                          setCurrent(current - 1);
-                        }
+        <>
+          {!!isStep && props.editable !== false && (
+            <FormStep
+              dataSource={schema.map(item => ({
+                title: item.title as string,
+                name: item.name as string,
+              }))}
+            />
+          )}
+          {RenderField(schema)}
+          {props.editable !== false && (
+            <FormButtonGroup
+              style={{
+                justifyContent: 'center',
+              }}
+              align="center"
+            >
+              {!!isStep ? (
+                <>
+                  {current > 0 &&
+                    React.cloneElement(
+                      stepPrevButton || <Button>上一步</Button>,
+                      {
+                        onClick: () => {
+                          if (actions.dispatch) {
+                            actions.dispatch('onFormStepPrevious', undefined);
+                            setCurrent(current - 1);
+                          }
+                        },
                       },
-                    },
+                    )}
+                  {current < schema.length - 1 ? (
+                    React.cloneElement(
+                      stepNextButton || <Button type="primary">下一步</Button>,
+                      {
+                        onClick: () => {
+                          actions.validate().then(() => {
+                            actions.dispatch!('onFormStepNext', undefined);
+                            setCurrent(current + 1);
+                          });
+                        },
+                      },
+                    )
+                  ) : (
+                    <Submit {...submitProps}>
+                      {resetProps?.children || 'Submit'}
+                    </Submit>
                   )}
-                {current < schema.length - 1 ? (
-                  React.cloneElement(
-                    stepNextButton || <Button type="primary">下一步</Button>,
-                    {
-                      onClick: () => {
-                        actions.validate().then(() => {
-                          actions.dispatch!('onFormStepNext', undefined);
-                          setCurrent(current + 1);
-                        });
-                      },
-                    },
-                  )
-                ) : (
-                  <Submit
-                    onSubmit={values => console.log(values)}
-                    {...submitProps}
-                  >
+                </>
+              ) : (
+                <>
+                  <Submit {...submitProps}>
                     {resetProps?.children || 'Submit'}
                   </Submit>
-                )}
-              </>
-            ) : (
-              <>
-                <Submit
-                  onSubmit={values => console.log(values)}
-                  {...submitProps}
-                >
-                  {resetProps?.children || 'Submit'}
-                </Submit>
-                <Reset {...resetProps}>{resetProps?.children || 'Reset'}</Reset>
-              </>
-            )}
-          </FormButtonGroup>
-        )}
+                  <Reset {...resetProps}>
+                    {resetProps?.children || 'Reset'}
+                  </Reset>
+                </>
+              )}
+            </FormButtonGroup>
+          )}
+        </>
       </SchemaForm>
     </Card>
   );

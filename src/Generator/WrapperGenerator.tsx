@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Layout, Space, Tabs } from 'antd';
 import SourceBox from './SourceBox';
 import TargetBox from './TargetBox';
 import SettingBox from './SettingBox';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { generatorState, schemaState, selectedState } from './Recoil';
-import GeneratorTable from '@/GeneratorTable';
+import GeneratorTable from '../GeneratorTable';
 import { Form } from '@formily/antd';
-import GeneratorForm from '@/GeneratorForm';
+import GeneratorForm from '../GeneratorForm';
 import { GeneratorProps } from '.';
 
 import './global.less';

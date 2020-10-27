@@ -1,21 +1,17 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Layout, Button, Space } from 'antd';
+import React from 'react';
+import { Layout, Button } from 'antd';
 import styles from './index.less';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { generatorState, selectedState, updateSchemaData } from '../Recoil';
+import { useRecoilState } from 'recoil';
+import { generatorState, updateSchemaData } from '../Recoil';
 import {
   createFormActions,
-  FormButtonGroup,
   FormEffectHooks,
-  Reset,
   SchemaForm,
   SchemaMarkupField as Field,
-  Submit,
 } from '@formily/antd';
-import components from '@/GeneratorForm/components';
+import components from '../../GeneratorForm/components';
 import { FormBlock, FormLayout } from '@formily/antd-components';
 import { FormOutlined } from '@ant-design/icons';
-import { ISchema } from '../interface';
 
 interface SettingBoxProps {
   collapsed: boolean;
@@ -65,7 +61,7 @@ const SettingBox: React.FC<SettingBoxProps> = ({ collapsed }) => {
             useCyclicLinkageEffects();
           }}
           initialValues={selected}
-          onChange={values => {
+          onChange={(values: any) => {
             actions.validate().then(msg => {
               setGeneratorState(prev => {
                 const { schemaData, locationPath } = prev;
@@ -87,93 +83,99 @@ const SettingBox: React.FC<SettingBoxProps> = ({ collapsed }) => {
             });
           }}
         >
-          <Field
-            title="字段名称"
-            name="name"
-            type="string"
-            x-rules={[
-              {
-                required: true,
-                pattern: /^[A-Za-z0-9_\-]+$/gi,
-                message: '字段名字只能由 大小写字母、数组、下划线 组成！',
-              },
-              {
-                validator(value) {
-                  let validator: any = true;
-                  updateSchemaData(
-                    schemaData,
-                    locationPath!,
-                    (lastPath, temp) => {
-                      const flag = temp?.find((item, index) => {
-                        return item.name == value && index !== lastPath;
-                      });
-                      if (!!flag) {
-                        validator = {
-                          type: 'error',
-                          message: '字段名称已存在！',
-                        };
-                      }
-                    },
-                  );
-                  return validator;
+          <>
+            <Field
+              title="字段名称"
+              name="name"
+              type="string"
+              x-rules={[
+                {
+                  required: true,
+                  pattern: /^[A-Za-z0-9_\-]+$/gi,
+                  message: '字段名字只能由 大小写字母、数组、下划线 组成！',
                 },
-              },
-            ]}
-          />
-          <Field title="标题" name="title" type="string" required />
-          <Field title="描述" name="description" type="string" />
-          {!['object', 'array', 'step'].includes(selected.type as string) && (
-            <>
-              <Field
-                title="候选值"
-                name="enum"
-                type="array"
-                visible={['select', 'checkbox', 'radio', 'transfer'].includes(
-                  selected.type as string,
-                )}
-                x-component-props={{
-                  renderAddition: () => (
-                    <Button type="link" size="small">
-                      <FormOutlined /> 添加
-                    </Button>
-                  ),
-                  renderEmpty: () => (
-                    <Button
-                      style={{
-                        marginTop: -10,
-                      }}
-                      type="link"
-                      size="small"
-                    >
-                      <FormOutlined /> 添加
-                    </Button>
-                  ),
-                }}
-              >
-                <Field type="object">
-                  <Field title="标题" name="label" type="string" required />
-                  <Field title="值" name="value" type="string" required />
+                {
+                  validator(value) {
+                    let validator: any = true;
+                    updateSchemaData(
+                      schemaData,
+                      locationPath!,
+                      (lastPath, temp) => {
+                        const flag = temp?.find((item, index) => {
+                          return item.name == value && index !== lastPath;
+                        });
+                        if (!!flag) {
+                          validator = {
+                            type: 'error',
+                            message: '字段名称已存在！',
+                          };
+                        }
+                      },
+                    );
+                    return validator;
+                  },
+                },
+              ]}
+            />
+            <Field title="标题" name="title" type="string" required />
+            <Field title="描述" name="description" type="string" />
+            {!['object', 'array', 'step'].includes(selected.type as string) && (
+              <>
+                <Field
+                  title="候选值"
+                  name="enum"
+                  type="array"
+                  visible={['select', 'checkbox', 'radio', 'transfer'].includes(
+                    selected.type as string,
+                  )}
+                  x-component-props={{
+                    renderAddition: () => (
+                      <Button type="link" size="small">
+                        <FormOutlined /> 添加
+                      </Button>
+                    ),
+                    renderEmpty: () => (
+                      <Button
+                        style={{
+                          marginTop: -10,
+                        }}
+                        type="link"
+                        size="small"
+                      >
+                        <FormOutlined /> 添加
+                      </Button>
+                    ),
+                  }}
+                >
+                  <Field type="object">
+                    <Field title="标题" name="label" type="string" required />
+                    <Field title="值" name="value" type="string" required />
+                  </Field>
                 </Field>
-              </Field>
-              {selected?.type && (
-                <Field title="默认值" name="default" type={selected?.type} />
-              )}
-              <FormBlock title="校验" size="small">
-                <FormLayout inline>
-                  <Field title="必填" name="required" type="boolean" />
-                  <Field title="正则" name="pattern" type="string" />
-                </FormLayout>
-              </FormBlock>
-              <FormBlock title="表格设置" size="small">
-                <FormLayout inline>
-                  <Field title="隐藏搜索" name="hideInSearch" type="boolean" />
-                  <Field title="隐藏列表" name="hideInTable" type="boolean" />
-                  <Field title="缩略" name="ellipsis" type="boolean" />
-                  <Field title="复制" name="copyable" type="boolean" />
-                </FormLayout>
-              </FormBlock>
-            </>
-          )}
+                {selected?.type && (
+                  <Field title="默认值" name="default" type={selected?.type} />
+                )}
+                <FormBlock title="校验" size="small">
+                  <FormLayout inline>
+                    <Field title="必填" name="required" type="boolean" />
+                    <Field title="正则" name="pattern" type="string" />
+                  </FormLayout>
+                </FormBlock>
+                <FormBlock title="表格设置" size="small">
+                  <FormLayout inline>
+                    <Field
+                      title="隐藏搜索"
+                      name="hideInSearch"
+                      type="boolean"
+                    />
+                    <Field title="隐藏列表" name="hideInTable" type="boolean" />
+                    <Field title="缩略" name="ellipsis" type="boolean" />
+                    <Field title="复制" name="copyable" type="boolean" />
+                  </FormLayout>
+                </FormBlock>
+              </>
+            )}
+          </>
         </SchemaForm>
       )}
     </Layout.Sider>

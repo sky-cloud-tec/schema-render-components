@@ -2,6 +2,14 @@
 title: 编辑器
 ---
 
+#### 安装使用
+
+```
+npm install --save antd @ant-design/pro-table @formily/antd @formily/antd-components formily-schema-generator
+```
+
+#### 举个例子
+
 ```tsx
 import React from 'react';
 import { Generator } from 'formily-schema-generator';
