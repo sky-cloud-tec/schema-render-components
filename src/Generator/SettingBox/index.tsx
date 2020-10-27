@@ -37,8 +37,10 @@ const useCyclicLinkageEffects = () => {
 };
 
 const SettingBox: React.FC<SettingBoxProps> = ({ collapsed }) => {
-  const [, setGeneratorState] = useRecoilState(generatorState);
-  const selected = useRecoilValue(selectedState);
+  const [GeneratorState, setGeneratorState] = useRecoilState(generatorState);
+  const { schemaData, selected, locationPath } = GeneratorState;
+  // const selected = useRecoilValue(selectedState);
+  // const selected = useRecoilValue(selectedState);
 
   return (
     <Layout.Sider
@@ -89,11 +91,33 @@ const SettingBox: React.FC<SettingBoxProps> = ({ collapsed }) => {
             title="字段名称"
             name="name"
             type="string"
-            required
             x-rules={[
               {
+                required: true,
                 pattern: /^[A-Za-z0-9_\-]+$/gi,
                 message: '字段名字只能由 大小写字母、数组、下划线 组成！',
+              },
+              {
+                validator(value) {
+                  let validator: any = true;
+                  updateSchemaData(
+                    schemaData,
+                    locationPath!,
+                    (lastPath, temp) => {
+                      const flag = temp?.find(item => {
+                        return item.name == value;
+                      });
+                      console.log(!!flag);
+                      if (!!flag) {
+                        validator = {
+                          type: 'error',
+                          message: '字段名称已存在！',
+                        };
+                      }
+                    },
+                  );
+                  return validator;
+                },
               },
             ]}
           />
