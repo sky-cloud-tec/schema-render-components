@@ -104,10 +104,9 @@ const SettingBox: React.FC<SettingBoxProps> = ({ collapsed }) => {
                     schemaData,
                     locationPath!,
                     (lastPath, temp) => {
-                      const flag = temp?.find(item => {
-                        return item.name == value;
+                      const flag = temp?.find((item, index) => {
+                        return item.name == value && index !== lastPath;
                       });
-                      console.log(!!flag);
                       if (!!flag) {
                         validator = {
                           type: 'error',
