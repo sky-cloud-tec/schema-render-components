@@ -1,6 +1,12 @@
 ---
-title: 表格Demo
+title: Table 表格
+sidemenu: false
+nav: { title: Table 表格, order: 3 }
 ---
+
+GeneratorTable 的诞生是为了解决项目中需要写很多 table 的样板代码的问题。
+
+## 代码演示
 
 ```tsx
 import React from 'react';
@@ -116,3 +122,14 @@ export default () => (
   />
 );
 ```
+
+## API
+
+GeneratorTable 在 ProTable 上进行了一层封装，支持了一些预设，并且封装了一些行为。这里只列出与 ProTable 不同的 api。
+
+### GeneratorTable
+
+| 参数        | 说明                               | 类型                                 | 默认值 |
+| ----------- | ---------------------------------- | ------------------------------------ | ------ |
+| schema      | 通过 schema 渲染表单               | <a href="/#ischema-属性">ISchema</a> | -      |
+| ~~columns~~ | 通过 schema 自动生成，不支持自定义 | -                                    | -      |
