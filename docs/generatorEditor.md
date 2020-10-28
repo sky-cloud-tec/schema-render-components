@@ -104,11 +104,11 @@ export default () => (
 
 ## API
 
-| 参数          | 说明           | 类型                                  | 默认值 |
-| ------------- | -------------- | ------------------------------------- | ------ |
-| defaultSchema | 初始化默认模型 | <a href="#ischema-属性">ISchema</a>[] | []     |
-| onSave        | 保存按钮事件   | (values: ISchema) => void             | -      |
-| onExport      | 导出按钮事件   | (values: ISchema) => void             | -      |
+| 参数          | 说明           | 类型                                                   | 默认值 |
+| ------------- | -------------- | ------------------------------------------------------ | ------ |
+| defaultSchema | 初始化默认模型 | <a href="/generator-editor#ischema-属性">ISchema</a>[] | []     |
+| onSave        | 保存按钮事件   | (values: ISchema) => void                              | -      |
+| onExport      | 导出按钮事件   | (values: ISchema) => void                              | -      |
 
 ### ISchema 属性
 
