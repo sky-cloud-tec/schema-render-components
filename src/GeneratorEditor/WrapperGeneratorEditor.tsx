@@ -17,6 +17,7 @@ const WrapperGenerator: React.FC<GeneratorProps> = ({
   defaultSchema,
   onExport,
   onSave,
+  style,
 }) => {
   const setGeneratorState = useSetRecoilState(generatorState);
   useEffect(() => {
@@ -30,7 +31,7 @@ const WrapperGenerator: React.FC<GeneratorProps> = ({
   const [activeKey, setActiveKey] = useState('edit');
 
   return (
-    <Layout className={styles.WrapperGenerator} id="generator">
+    <Layout className={styles.WrapperGenerator} id="generator" style={style}>
       <SourceBox />
       <Layout.Content>
         <Tabs

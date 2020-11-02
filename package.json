@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "formily-schema-generator",
   "version": "0.0.1",
   "scripts": {

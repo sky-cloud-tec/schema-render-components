@@ -5,5 +5,7 @@ export default {
     sourcemap: true,
     minFile: true,
   },
+  cssModules: true,
+  injectCSS: true,
   doc: { typescript: true },
 };

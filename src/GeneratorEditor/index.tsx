@@ -9,6 +9,7 @@ export interface GeneratorProps {
   defaultSchema?: ISchema[];
   onSave?: (values: ISchema[]) => void;
   onExport?: (values: ISchema[]) => void;
+  style?: React.CSSProperties;
 }
 
 const GeneratorEditor: React.FC<GeneratorProps> = props => {
