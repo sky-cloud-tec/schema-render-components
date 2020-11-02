@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { Button, Card, message, Progress, Space } from 'antd';
+import React, { useRef } from 'react';
+import { Button, message, Space } from 'antd';
 import { DeleteOutlined, CopyOutlined, DragOutlined } from '@ant-design/icons';
 import { useDrag, useDrop } from 'react-dnd';
 import { DropResult, ISchema } from '../interface';

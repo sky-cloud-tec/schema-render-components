@@ -14,10 +14,10 @@ npm install --save antd @ant-design/pro-table @formily/antd @formily/antd-compon
 
 ```tsx
 import React from 'react';
-import { Generator } from 'formily-schema-generator';
+import { GeneratorEditor } from 'formily-schema-generator';
 
 export default () => (
-  <Generator
+  <GeneratorEditor
     defaultSchema={[
       {
         type: 'step',

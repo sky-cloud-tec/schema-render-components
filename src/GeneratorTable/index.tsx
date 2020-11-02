@@ -1,8 +1,7 @@
 import React from 'react';
-import { ISchema } from '@/Generator/interface';
-import { Empty, Form } from 'antd';
-import { RenderField } from '@/Generator/TargetBox/RenderField';
-import ProTable, { ProColumns, ProTableProps } from '@ant-design/pro-table';
+import { ISchema } from '@/GeneratorEditor/interface';
+import { Empty } from 'antd';
+import ProTable, { ProTableProps } from '@ant-design/pro-table';
 
 interface GeneratorTableProps extends Omit<ProTableProps<any, any>, 'columns'> {
   schema: ISchema[];

@@ -3,7 +3,7 @@ import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { RecoilRoot } from 'recoil';
-import WrapperGenerator from './WrapperGenerator';
+import WrapperGeneratorEditor from './WrapperGeneratorEditor';
 
 export interface GeneratorProps {
   defaultSchema?: ISchema[];
@@ -11,14 +11,14 @@ export interface GeneratorProps {
   onExport?: (values: ISchema[]) => void;
 }
 
-const Generator: React.FC<GeneratorProps> = props => {
+const GeneratorEditor: React.FC<GeneratorProps> = props => {
   return (
     <DndProvider backend={HTML5Backend}>
       <RecoilRoot>
-        <WrapperGenerator {...props} />
+        <WrapperGeneratorEditor {...props} />
       </RecoilRoot>
     </DndProvider>
   );
 };
 
-export default Generator;
+export default GeneratorEditor;

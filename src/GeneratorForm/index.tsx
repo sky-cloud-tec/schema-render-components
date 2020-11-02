@@ -8,7 +8,7 @@ import {
   createFormActions,
 } from '@formily/antd';
 import components from './components';
-import { ISchema } from '@/Generator/interface';
+import { ISchema } from '@/GeneratorEditor/interface';
 import {
   IAntdSchemaFormProps,
   IResetProps,
@@ -16,7 +16,7 @@ import {
 } from '@formily/antd-components/esm/types';
 import { Button, Card } from 'antd';
 import { FormOutlined } from '@ant-design/icons';
-import { FormCard, FormLayout, FormStep } from '@formily/antd-components';
+import { FormCard, FormStep } from '@formily/antd-components';
 
 interface GeneratorFormProps extends Omit<IAntdSchemaFormProps, 'schema'> {
   schema: ISchema[];

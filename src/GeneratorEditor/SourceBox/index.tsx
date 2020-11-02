@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Layout, Space, Typography } from 'antd';
+import { Divider, Layout, Typography } from 'antd';
 import WrapperSourceBox from './WrapperSourceBox';
 import BasicComponents from './BasicComponents';
 
