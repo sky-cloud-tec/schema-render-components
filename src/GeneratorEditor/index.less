@@ -1,3 +1,27 @@
+:global {
+  #generator {
+    .ant-layout-sider-trigger {
+      position: absolute !important;
+      width: 100% !important;
+    }
+
+    .ant-tabs-content,
+    .ant-tabs-tabpane {
+      height: 100%;
+    }
+
+    .ant-tabs-tabpane[id*='edit'] {
+      > div {
+        height: 100%;
+      }
+      .ant-form-item {
+        margin-top: 10px !important;
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+}
+
 .WrapperGenerator {
   min-height: 500px;
   height: 100%;

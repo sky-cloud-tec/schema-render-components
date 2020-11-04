@@ -10,7 +10,6 @@ import { Form } from '@formily/antd';
 import GeneratorForm from '../GeneratorForm';
 import { GeneratorProps } from '.';
 
-import './global.less';
 import styles from './index.less';
 
 const WrapperGenerator: React.FC<GeneratorProps> = ({
