@@ -4,16 +4,16 @@ sidemenu: false
 nav: { title: Table 表格, order: 3 }
 ---
 
-GeneratorTable 的诞生是为了解决项目中需要写很多 table 的样板代码的问题。
+TableRender 的诞生是为了解决项目中需要写很多 table 的样板代码的问题。
 
 ## 代码演示
 
 ```tsx
 import React from 'react';
-import { GeneratorTable } from 'formily-schema-generator';
+import { TableRender } from 'schema-render-components';
 
 export default () => (
-  <GeneratorTable
+  <TableRender
     request={params =>
       Promise.resolve({
         data: [
@@ -125,9 +125,9 @@ export default () => (
 
 ## API
 
-GeneratorTable 在 ProTable 上进行了一层封装，支持了一些预设，并且封装了一些行为。这里只列出与 ProTable 不同的 api。
+TableRender 在 ProTable 上进行了一层封装，支持了一些预设，并且封装了一些行为。这里只列出与 ProTable 不同的 api。
 
-### GeneratorTable
+### TableRender
 
 | 参数        | 说明                               | 类型                                 | 默认值 |
 | ----------- | ---------------------------------- | ------------------------------------ | ------ |

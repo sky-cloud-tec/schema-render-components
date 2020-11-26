@@ -5,9 +5,9 @@ import TargetBox from './TargetBox';
 import SettingBox from './SettingBox';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { generatorState, schemaState, selectedState } from './Recoil';
-import GeneratorTable from '../GeneratorTable';
+import TableRender from '../TableRender';
 import { Form } from '@formily/antd';
-import GeneratorForm from '../GeneratorForm';
+import FormRender from '../FormRender';
 import { GeneratorProps } from '.';
 
 import styles from './index.less';
@@ -100,13 +100,13 @@ const WrapperGenerator: React.FC<GeneratorProps> = ({
             </Form>
           </Tabs.TabPane>
           <Tabs.TabPane tab="表格预览" key="table">
-            <GeneratorTable schema={schema} />
+            <TableRender schema={schema} />
           </Tabs.TabPane>
           <Tabs.TabPane tab="表单预览" key="form">
-            <GeneratorForm schema={schema} />
+            <FormRender schema={schema} />
           </Tabs.TabPane>
           <Tabs.TabPane tab="详情预览" key="description">
-            <GeneratorForm schema={schema} editable={false} />
+            <FormRender schema={schema} editable={false} />
           </Tabs.TabPane>
         </Tabs>
       </Layout.Content>

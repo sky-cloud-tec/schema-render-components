@@ -1,5 +1,5 @@
 {
-  "name": "formily-schema-generator",
+  "name": "schema-render-components",
   "version": "0.0.1",
   "scripts": {
     "start": "dumi dev",

@@ -7,17 +7,17 @@ nav: { title: 编辑器, order: 1 }
 ## 安装
 
 ```shell
-npm install --save antd @ant-design/pro-table @formily/antd @formily/antd-components formily-schema-generator
+npm install --save antd @ant-design/pro-table @formily/antd @formily/antd-components schema-render-components
 ```
 
 ## 代码演示
 
 ```tsx
 import React from 'react';
-import { GeneratorEditor } from 'formily-schema-generator';
+import { EditorRender } from 'schema-render-components';
 
 export default () => (
-  <GeneratorEditor
+  <EditorRender
     defaultSchema={[
       {
         type: 'step',

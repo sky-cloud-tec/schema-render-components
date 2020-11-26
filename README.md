@@ -8,7 +8,7 @@
  * @LastEditTime: 2020-10-21 14:26:27
 -->
 
-# formily-schema-generator
+# schema-render-components
 
 ## Getting Started
 

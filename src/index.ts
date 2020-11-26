@@ -7,6 +7,6 @@
  * @Date: 2020-09-18 11:10:09
  * @LastEditTime: 2020-11-02 16:31:07
  */
-export { default as GeneratorEditor } from './GeneratorEditor';
-export { default as GeneratorForm } from './GeneratorForm';
-export { default as GeneratorTable } from './GeneratorTable';
+export { default as EditorRender } from './EditorRender';
+export { default as FormRender } from './FormRender';
+export { default as TableRender } from './TableRender';

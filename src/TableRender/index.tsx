@@ -1,9 +1,9 @@
 import React from 'react';
-import { ISchema } from '@/GeneratorEditor/interface';
+import { ISchema } from '@/EditorRender/interface';
 import { Empty } from 'antd';
 import ProTable, { ProTableProps } from '@ant-design/pro-table';
 
-interface GeneratorTableProps extends Omit<ProTableProps<any, any>, 'columns'> {
+interface TableRenderProps extends Omit<ProTableProps<any, any>, 'columns'> {
   schema: ISchema[];
 }
 
@@ -55,10 +55,7 @@ const getColumns: (
   });
 };
 
-const GeneratorTable: React.FC<GeneratorTableProps> = ({
-  schema,
-  ...props
-}) => {
+const TableRender: React.FC<TableRenderProps> = ({ schema, ...props }) => {
   if (schema.length > 0) {
     const columns: any = getColumns(schema).flat(Infinity);
 
@@ -102,4 +99,4 @@ const GeneratorTable: React.FC<GeneratorTableProps> = ({
   return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
 };
 
-export default GeneratorTable;
+export default TableRender;

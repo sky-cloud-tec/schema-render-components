@@ -9,7 +9,7 @@ nav: { title: 表单/详情, order: 2 }
 ```tsx
 import React, { useState } from 'react';
 import { Switch } from 'antd';
-import { GeneratorForm } from 'formily-schema-generator';
+import { FormRender } from 'schema-render-components';
 
 export default () => {
   const [editable, setEditable] = useState(true);
@@ -24,7 +24,7 @@ export default () => {
       />
       <br />
       <br />
-      <GeneratorForm
+      <FormRender
         key={`${editable}`}
         editable={editable}
         initialValues={{

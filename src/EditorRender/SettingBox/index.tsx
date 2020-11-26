@@ -9,7 +9,7 @@ import {
   SchemaForm,
   SchemaMarkupField as Field,
 } from '@formily/antd';
-import components from '../../GeneratorForm/components';
+import components from '../../FormRender/components';
 import { FormBlock, FormLayout } from '@formily/antd-components';
 import { FormOutlined } from '@ant-design/icons';
 

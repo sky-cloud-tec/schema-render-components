@@ -8,7 +8,7 @@ import {
   createFormActions,
 } from '@formily/antd';
 import components from './components';
-import { ISchema } from '@/GeneratorEditor/interface';
+import { ISchema } from '@/EditorRender/interface';
 import {
   IAntdSchemaFormProps,
   IResetProps,
@@ -18,7 +18,7 @@ import { Button, Card } from 'antd';
 import { FormOutlined } from '@ant-design/icons';
 import { FormCard, FormStep } from '@formily/antd-components';
 
-interface GeneratorFormProps extends Omit<IAntdSchemaFormProps, 'schema'> {
+interface FormRenderProps extends Omit<IAntdSchemaFormProps, 'schema'> {
   schema: ISchema[];
   submitProps?: ISubmitProps & {
     children: React.ReactNode;
@@ -79,7 +79,7 @@ const RenderField = (fields: ISchema[] = []) => {
   });
 };
 const actions = createFormActions();
-const GeneratorForm: React.FC<GeneratorFormProps> = ({
+const FormRender: React.FC<FormRenderProps> = ({
   schema,
   submitProps,
   resetProps,
@@ -173,4 +173,4 @@ const GeneratorForm: React.FC<GeneratorFormProps> = ({
   );
 };
 
-export default GeneratorForm;
+export default FormRender;

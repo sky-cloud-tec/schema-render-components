@@ -2,7 +2,7 @@ import React from 'react';
 import { WrapperTargetBoxProps } from './WrapperTargetBox';
 import RenderChildren from './RenderChildren';
 import { FormItem } from '@formily/antd';
-import components from '../../GeneratorForm/components';
+import components from '../../FormRender/components';
 import { Card } from 'antd';
 import { ISchema } from '../interface';
 
