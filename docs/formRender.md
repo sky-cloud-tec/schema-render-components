@@ -8,7 +8,7 @@ nav: { title: 表单/详情, order: 2 }
 
 ```tsx
 import React, { useState } from 'react';
-import { Switch } from 'antd';
+import { Switch, Button, Layout, Space, Tabs, Steps } from 'antd';
 import { FormRender } from 'schema-render-components';
 
 export default () => {

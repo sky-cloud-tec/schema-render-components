@@ -10,6 +10,7 @@ TableRender 的诞生是为了解决项目中需要写很多 table 的样板代�
 
 ```tsx
 import React from 'react';
+import { Button, Layout, Space, Tabs, Steps } from 'antd';
 import { TableRender } from 'schema-render-components';
 
 export default () => (

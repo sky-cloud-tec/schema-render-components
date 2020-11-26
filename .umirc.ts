@@ -11,6 +11,7 @@ export default defineConfig({
         libraryDirectory: 'es',
         style: true,
       },
+      'antd',
     ],
   ],
   // more config: https://d.umijs.org/config

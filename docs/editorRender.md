@@ -14,6 +14,7 @@ npm install --save antd @ant-design/pro-table @formily/antd @formily/antd-compon
 
 ```tsx
 import React from 'react';
+import { Button, Layout, Space, Tabs, Steps } from 'antd';
 import { EditorRender } from 'schema-render-components';
 
 export default () => (
